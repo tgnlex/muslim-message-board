@@ -1,0 +1,13 @@
+<h1>Recent Posts</h1>
+<% @posts.each do |post| %>
+  <h3><%= post.title %></h3>
+  <p><%= post.description %></p>
+  <%= link_to "See More", post_path(post), class: "btn btn-default" %>
+
+<% end %>
+<div>
+  <%= link_to "New Post", new_post_path %>
+</div>
+<div>
+  <%= link_to "Go Home", root_path %>
+</div>
