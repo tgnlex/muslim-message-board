@@ -9,11 +9,89 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-
+<body>
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <%= 
+          link_to "Muslim Connect", 
+          root_path, 
+          class: "navbar-brand" 
+        %>
+      </div>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <li class="nav-item">
+            <a class="nav-link">
+              <%= 
+                link_to "Dashboard", 
+                dashboard_path 
+              %>    
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <%= 
+                link_to "Discussion", 
+                posts_path 
+              %>
+            </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+          <%= 
+            link_to "Community Guidelines",
+            rules_path 
+          %>
+        </a>
+        </li>
+        <li class="nav-item"> 
+         <a class="nav-link"> 
+          <%= 
+            link_to "Learn More", 
+            info_path 
+          %>
+          </a>         
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <%=
+              link_to "Sign Up", 
+              new_user_registration_path
+            %>  
+          </a>
+        </li>
+        <% if user_signed_in? %>
+        <li class="nav-item">
+          <a class="nav-link">
+            <%=
+              link_to "Sign out", 
+              destroy_user_session_path,
+              method: :delete
+            %>
+          </a>
+        </li>
+        <% else %>
+          <li class="nav-item">
+            <a class="nav-link">
+              <%= 
+                link_to "Log In",
+                new_user_session_path 
+              %>
+            </a>
+          </li>
+          <% end %>
+        </div class="container-fluid">
+      </nav>
+    </div>
+  </div>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= yield %>
   </body>
 </html>
+<style>
+.nav-item {
+  margin-right: 20px;
+}
+</style>
