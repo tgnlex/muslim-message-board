@@ -9,78 +9,103 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
+  
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <%= 
-          link_to "Muslim Connect", 
-          root_path, 
-          class: "navbar-brand" 
-        %>
-      </div>
-        <li class="nav-item">
-           <%= 
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <%= 
+            link_to "Muslim Connect", 
+            root_path, class: "navbar-brand" 
+          %>
+        </div>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <%= 
               link_to "Dashboard", 
               dashboard_path 
             %>    
           </li>
           <li class="nav-item">
-            <a class="nav-link">
-              <%= 
-                link_to "Discussion", 
-                posts_path 
-              %>
-            </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">
-          <%= 
-            link_to "Community Guidelines",
-            rules_path 
-          %>
-        </a>
-        </li>
-        <li class="nav-item"> 
-         <a class="nav-link"> 
-          <%= 
-            link_to "Learn More", 
-            info_path 
-          %>
-          </a>         
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">
+            <%= 
+              link_to "Discussion", 
+              posts_path 
+            %>
+          </li>
+          <li class="nav-item">
+            <%= 
+              link_to "Guidelines",
+              rules_path 
+            %>
+          </li>
+          <li class="nav-item">
+            <%= 
+              link_to "Learn More", 
+              info_path 
+            %> 
+          </li>
+        </ul>
+          
+          <% if user_signed_in? %>
+          <p class="logout">
+            <%=
+              link_to "Log out", 
+              destroy_user_session_path,
+              method: :delete
+            %>
+          </p>
+          <% else %>
+          <p class="login">
+            <%= 
+            link_to "Log In",
+            new_user_session_path 
+            %>
+          </p>
+          <p>
             <%=
               link_to "Sign Up", 
               new_user_registration_path
             %>  
-          </a>
-        </li>
-        <% if user_signed_in? %>
-        <li class="nav-item">
-          <a class="nav-link">
-            <%=
-              link_to "Sign out", 
-              destroy_user_session_path,
-              method: :delete
-            %>
-          </a>
-        </li>
-        <% else %>
-          <li class="nav-item">
-            <a class="nav-link">
+          </p>
+        <% end %>
+          <% if user_signed_in? %>
+            <p class="new-post">
               <%= 
-                link_to "Log In",
-                new_user_session_path 
-              %>
-            </a>
-          </li>
+                link_to "New Post", 
+                new_post_path
+              %> 
+            </p>
           <% end %>
-        </div>
-      </nav>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <%= yield %>
+        <form class="d-flex">
+          <input 
+            class="form-control me-2" 
+            type="search" 
+            placeholder="Search" 
+            aria-label="Search" />
+          <button 
+            class="btn btn-outline-success" 
+            type="submit">
+              Search
+          </button>
+        </form>
+      </div>
+    </nav>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
   </body>
 </html>
+<style>
+ .nav-item{
+  margin-left: 20px;
+ }
+ .login {
+  margin-right: 20px;
+ }
+ .logout {
+   margin-right: 20px;
+ }
+ .new-post {
+   margin-right: 20px;
+ }
+</style>
