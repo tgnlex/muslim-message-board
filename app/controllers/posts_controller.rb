@@ -10,13 +10,13 @@ class PostsController < ApplicationController
     end
     
     def new 
-      @post = current_user.posts.build
+      @post = Post.new
     end 
 
     def create
-      @post = current_user.posts.build(post_params)
+      @post = Post.new(post_params)
       if @post.save 
-        redirect_to post_path
+        redirect_to @post
       else 
         render 'new'
       end
@@ -40,8 +40,9 @@ class PostsController < ApplicationController
     end 
 
     def destroy
-      @post.destroy
-      redirect_to post_path
+        @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to root_path
     end
     # ############################### #
     # ##### ADMIN FUNCTIONS END ##### #
