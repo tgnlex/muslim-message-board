@@ -1,4 +1,8 @@
 <%= simple_form_for([@post, @post.comments.build]) do |f| %>
-  <%= f.input :content, label: "Comment" %>
+  <%= 
+    f.input :content, 
+    placeholder: "Enter comment here...", 
+    label:"Must be signed in" 
+  %>
   <%= f.button :submit %>
-<% end %>
+<% end %> 
